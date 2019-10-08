@@ -124,6 +124,7 @@ app.put("/blogs/:id", function(req, res) {
     console.log(req.params.id);
 
     Blog.updateOne({ _id: req.params.id }, req.body.blog, function(err, updatedBlog) {
+        console.log("Am i in");
         if (err) {
             //console.log(req.body.blog);
 

@@ -120,21 +120,35 @@ app.get("/blogs/:id/edit", function(req, res) {
 // after editing in the form update it
 app.put("/blogs/:id", function(req, res) {
 
-    Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog) {
+    console.log(req.body.blog);
+    console.log(req.params.id);
+
+    Blog.updateOne({ _id: req.params.id }, req.body.blog, function(err, updatedBlog) {
         if (err) {
+            //console.log(req.body.blog);
 
             res.redirect("/blogs");
-
         } else {
-            console.log(updatedBlog);
             res.redirect("/blogs/" + req.params.id);
-
         }
     })
 
 });
 
 
+// delete the blog 
+app.delete("/blogs/:id", function(req, res) {
+    Blog.findByIdAndRemove(req.params.id, function(err) {
+        if (err) {
+            res.redirect("/blogs");
+
+        } else {
+            res.redirect("/blogs");
+
+        }
+    })
+
+})
 
 
 
